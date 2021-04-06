@@ -1,5 +1,8 @@
 # Markdown Links
 
+Con descripción del módulo, instrucciones de instalación/uso, documentación del API y ejemplos. Todo lo relevante para que cualquier developer que quiera usar tu librería pueda hacerlo sin inconvenientes.
+
+
 ## Índice
 
 * [1. Preámbulo](#1-preámbulo)
