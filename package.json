@@ -1,26 +1,33 @@
 {
   "name": "md-links",
-  "version": "0.1.0",
-  "devDependencies": {
-    "jest": "^26.6.3"
-  },
-  "description": "Con descripción del módulo, instrucciones de instalación/uso, documentación del API y ejemplos. Todo lo relevante para que cualquier developer que quiera usar tu librería pueda hacerlo sin inconvenientes.",
+  "version": "1.0.0",
+  "description": "Verify files with .md extension & validates if links existed inside them are broken.",
   "main": "index.js",
+  "license": "ISC",
+  "bin": {
+    "md-links": "./mdLinks.js"
+  },
   "directories": {
     "test": "test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "marked": "^2.0.1"
+  },
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cecisalof/CDMX010-md-links.git"
   },
   "author": "Cecilia Losada",
-  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cecisalof/CDMX010-md-links/issues"
+    "url": "https://github.com/cecisalof/CDMX010-md-links/issues",
+    "email": "cecilia.sanchezlosada@gmail.com"
   },
-  "homepage": "https://github.com/cecisalof/CDMX010-md-links#readme"
+  "homepage": "https://github.com/cecisalof/CDMX010-md-links#readme",
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
 }
