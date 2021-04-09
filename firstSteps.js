@@ -5,17 +5,17 @@
 	// const chalk = require('chalk')
 
 	// READING FILES ASYNCHRONOUSLY -- fs.readFile takes the file path and the callback
-	//  const readingFiles = () => {
-		fs.readFile('./sampleFiles/test.md', 'utf8', (err, data) => {
-			if (err) {
-				console.error(err)
-				return
-			}
-		  // Print the string representation of the data
-		  console.log(data) //data contains the full content of the file
-		})
+	// //  const readingFiles = () => {
+	// 	fs.readFile('./sampleFiles/test.md', 'utf8', (err, data) => {
+	// 		if (err) {
+	// 			console.error(err)
+	// 			return
+	// 		}
+	// 	  // Print the string representation of the data
+	// 	  console.log(data) //data contains the full content of the file
+	// 	})
 
-	// }
+	// // }
 
 	//  // READING FILES SYNCHRONOUSLY 
 
