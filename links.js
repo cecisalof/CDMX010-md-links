@@ -1,7 +1,7 @@
 const marked = require("marked");
 const fs = require('fs');
 
-const ArrOfLinks = (files) => {
+const arrOfLinks = (files) => {
 
     const file = fs.promises.readFile('./README.md', 'utf8')
     //console.log(fileContent)
@@ -11,11 +11,13 @@ const ArrOfLinks = (files) => {
        let links = [];
        //console.log(links);
   
-       const renderer = new marked.Renderer();
+       const renderer = new marked.Renderer(); //An object containing functions to render tokens to HTML.
        renderer.link = (href, title, text) => {
+        // console.log(href)
+        // console.log(text)
+        //console.log(links)
         links = [].concat(...links, {href, title, text})
-        
-  
+          
        }
        
        marked.use({ renderer });
@@ -30,4 +32,4 @@ const ArrOfLinks = (files) => {
       return file;
     }
     
-ArrOfLinks();
+arrOfLinks();

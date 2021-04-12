@@ -81,10 +81,10 @@ const accesToSubdir = (path) => {
     // console.dir(paths)
 
     const paths = klawSync(path.toString()) //Return an array of objetcs with all the files that exist inside ./sampleFiles directory. 
-    //console.log(paths);
+    console.log(paths);
     return paths
 };
-//accesToSubdir('./sampleFiles');
+accesToSubdir('./sampleFiles');
 
 
 //------ GETTING ARRAY OF LINKS FROM A .md FILE-----------
