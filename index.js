@@ -1,16 +1,16 @@
 const fs = require('fs');
-const { get } = require('http');
+//const { get } = require('http');
 const marked = require("marked");
 const path = require('path');
 const klawSync = require('klaw-sync')
 
 
-// ------------- READING FILES -------------------
-// const readFiles = (path) => {
-//     const fileContent = fs.readFileSync(path, 'utf8')
-//     //console.log(fileContent);
-//     return fileContent;
-// };
+// ------------- READING FILES SYNCHONOUSLY-------------------
+const readFiles = (path) => {
+    const fileContent = fs.readFileSync(path, 'utf8')
+    //console.log(fileContent);
+    return fileContent;
+};
 // //readFiles('./README.md');
 
 //-------------READING FILES ASYNCHRONOUSLY -- fs.readFile takes the file path and the callback
@@ -20,12 +20,15 @@ const readingFiles = (path) => {
 				console.error(err)
 				return
 			}
-		  // Print the string representation of the data
-		  return (data) //data contains the full content of the file
+      // Print the string representation of the data
+      console.log(data.toString());
+      return (data) //data contains the full content of the file
+      
 		})
 
     }
-    // readingFiles()
+   
+    //readingFiles("./README.md")
 
 // ------------- GET FILES EXTENSION-------------
 const getFileExtension = (URL) => {
@@ -84,58 +87,54 @@ const accesToSubdir = (path) => {
 //accesToSubdir('./sampleFiles');
 
 
-const showLinks = (files) => {
+//------ GETTING ARRAY OF LINKS FROM A .md FILE-----------
+const ArrOfLinks = (files) => {
 
-    const linksOb = readingFiles("./README.md")
-    console.log(linksOb)
-    // .then((data) => {
-    //   let document = data;
-
-    //    let links = [];
-  
-    //    const renderer = new marked.Renderer();
-    //    renderer.link = (href, title, text) => {
-    //     links = [].concat(...links, {href, title, text})
-  
-    //    }
+    const file = fs.promises.readFile('./README.md', 'utf8')
+    //console.log(fileContent)
+    .then((data) => {
+      let fileContent = data;
       
-    //    marked.use({ renderer });
+       let links = [];
+       //console.log(links);
+  
+       const renderer = new marked.Renderer();
+       renderer.link = (href, title, text) => {
+        links = [].concat(...links, {href, title, text})
+       }
+       
+       marked.use({ renderer });
       
-    //   marked(document);
+      marked(fileContent);
+       
+      //console.log(links);
+      return links;
+       
+      }).catch((err) => console.log(err))
 
-    //    return links;
-    //   }).catch((err) => console.log(err))
-
-      return linksOb;
+      return file;
     }
     
-showLinks();
+//ArrOfLinks();
 
 
-//-------FILTERING PATH FROM ArrofFiles
-// const filter_path = (file) => {
-//     return file.path == "/Users/cecilia/Desktop/LABORATORIA/CDMX010-md-links/";
-// }
-
-
-const mdLinks = (paths, dir) => {
-    //const ArrOfFiles = accesToSubdir('./sampleFiles');
-    // readingFiles("./README.md");
-    // console.log(ArrOfFiles);
-    // ArrOfFiles.forEach(files => {
-    //     const filesPath = ArrOfFiles.filter(filter_path);
-    //     console.log(filesPath);
-    //     // const extName = getFileExtension(path);
-    //     // console.log(extName);
-    // });
-    // const extName = getFileExtension(path);
-    // const fileContent = readFiles('./README.md'); 
-    //const files = listOfFiles(path);
-    // console.log(extName);
-    // if( extName === '.md' ){
-        
-    //     return;
-    // }
-    // console.log()
+function mdLinks(paths, dir) {
+  //const ArrOfFiles = accesToSubdir('./sampleFiles');
+  // readingFiles("./README.md");
+  // console.log(ArrOfFiles);
+  // ArrOfFiles.forEach(files => {
+  //     const filesPath = ArrOfFiles.filter(filter_path);
+  //     console.log(filesPath);
+  //     // const extName = getFileExtension(path);
+  //     // console.log(extName);
+  // });
+  // const extName = getFileExtension(path);
+  // const fileContent = readFiles('./README.md'); 
+  //const files = listOfFiles(path);
+  // console.log(extName);
+  // if( extName === '.md' ){
+  //     return;
+  // }
+  // console.log()
 }
 mdLinks();

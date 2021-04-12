@@ -134,3 +134,7 @@
 // //  console.log('GETING LINKS IN A FILE', getLinksInFiles('./README.md'))
 
 
+//-------FILTERING PATH FROM ArrofFiles
+// const filter_path = (file) => {
+//     return file.path == "/Users/cecilia/Desktop/LABORATORIA/CDMX010-md-links/";
+// }
