@@ -105,3 +105,32 @@
 
 
 // // };
+
+
+// --------------¿IS IT A .md FILE?------------------
+// function getLinksInFiles(data){
+//      const regexp = /\(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}\gi/gm;
+//     // /* Match only links that are fully qualified with https */
+//     //const fullLinkOnlyRegex = /^\[([\w\s\d]+)\]\((https?:\/\/[\w\d./?=#]+)\)$/
+//     // /* Match full links and relative paths */
+//     //const regEx = /^\[([\w\s\d]+)\]\(((?:\/|https?:\/\/)[\w\d./?=#]+)\)$/
+//     const myMatch = data.replace(/[{()}]/g, ' ').match(regexp)
+//     console.log(myMatch)
+//     return myMatch;
+//     /* ["[View the analytics docs](https://getanalytics.io/)", "View the analytics docs", "https://getanalytics.io/", index: 0, input: "[View the analytics docs](https://getanalytics.io/)", groups: undefined] */
+
+//     // // de-structure the array
+//     // const [ full, text, url ] = myMatch
+
+//     // console.log(text)
+//     // // 'View the analytics docs'
+
+//     // console.log(url)
+//     // // 'https://getanalytics.io/'
+//   }
+//   getLinksInFiles('./README.md');
+// //  console.log('PRINTING FILE CONTENT FROM', readFiles('./README.md'))
+// // // // console.log('PRINTING FILE EXTENSION FROM', getFileExtension('./test.md'))
+// //  console.log('GETING LINKS IN A FILE', getLinksInFiles('./README.md'))
+
+
