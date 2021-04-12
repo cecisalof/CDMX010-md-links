@@ -6,15 +6,29 @@ const klawSync = require('klaw-sync')
 
 
 // ------------- READING FILES -------------------
-function readFiles(path){
-    const fileContent = fs.readFileSync(path, 'utf8')
-    //console.log(fileContent);
-    return fileContent;
-};
-//readFiles('./README.md');
+// const readFiles = (path) => {
+//     const fileContent = fs.readFileSync(path, 'utf8')
+//     //console.log(fileContent);
+//     return fileContent;
+// };
+// //readFiles('./README.md');
+
+//-------------READING FILES ASYNCHRONOUSLY -- fs.readFile takes the file path and the callback
+const readingFiles = (path) => {
+	const fileContent = fs.readFile(path, 'utf8', (err, data) => {
+			if (err) {
+				console.error(err)
+				return
+			}
+		  // Print the string representation of the data
+		  return (data) //data contains the full content of the file
+		})
+
+    }
+    // readingFiles()
 
 // ------------- GET FILES EXTENSION-------------
-function getFileExtension(URL){
+const getFileExtension = (URL) => {
     //Return the extension:
     const extName = path.extname(URL);
     console.log(extName);
@@ -24,7 +38,7 @@ function getFileExtension(URL){
 
 
 //----------ACCESS TO DIRECTORIES & SUBDIRECTORIES-------
-  function listOfFiles(path)  {
+  const listOfFiles = (path) =>  {
 
     const readDir = fs.readdirSync(path);
     console.log(readDir);
@@ -34,27 +48,27 @@ function getFileExtension(URL){
   //listOfFiles('./sampleFiles');
 
 // //-----MARKED LIBRARY ------
-  render_unlink = function (paths) {
-     let render = new marked.Renderer();
-     render.link = function (href, title, text) {
-        // render link text in a way that is appropriate
-        // for a medium that is not a computer connected
-        // to the Internet
-        return text + ' ( link to: ' + href + ' )';
-     };
-     return render;
- };
+//   render_link = const getPaths = (paths) => {
+//      let render = new marked.Renderer();
+//      render.link = function (href, title, text) {
+//         // render link text in a way that is appropriate
+//         // for a medium that is not a computer connected
+//         // to the Internet
+        
+//         return text + ' ( link to: ' + href + ' )';
+//      };
+//      return render;
+//  };
  
-
-    // fileContent = readFiles('./README.md'); 
-    // // console.log(marked(fileContent));
-    // console.log (marked(fileContent, {
-    //         renderer: render_unlink()
-    //     }));
+//     fileContent = readFiles('./README.md'); 
+//     // console.log(marked(fileContent));
+//     console.log (marked(fileContent, {
+//             renderer: render_link()
+//         }));
 
 
 //------------EXERCISE OF RECURSIVNESS WITH klawSync-------
-function accesToSubdir(path) {
+const accesToSubdir = (path) => {
     // let paths;
     // try {
     // paths = klawSync('./sampleFiles') //Return an array of objetcs with all the files that exist inside ./sampleFiles directory. 
@@ -69,20 +83,51 @@ function accesToSubdir(path) {
 };
 //accesToSubdir('./sampleFiles');
 
-function filter_path(file) {
-    return file.path == "/Users/cecilia/Desktop/LABORATORIA/CDMX010-md-links/";
-}
+
+const showLinks = (files) => {
+
+    const linksOb = readingFiles("./README.md")
+    console.log(linksOb)
+    // .then((data) => {
+    //   let document = data;
+
+    //    let links = [];
+  
+    //    const renderer = new marked.Renderer();
+    //    renderer.link = (href, title, text) => {
+    //     links = [].concat(...links, {href, title, text})
+  
+    //    }
+      
+    //    marked.use({ renderer });
+      
+    //   marked(document);
+
+    //    return links;
+    //   }).catch((err) => console.log(err))
+
+      return linksOb;
+    }
+    
+showLinks();
 
 
-function mdLinks (paths, dir){
-    const ArrofFiles = accesToSubdir('./sampleFiles');
+//-------FILTERING PATH FROM ArrofFiles
+// const filter_path = (file) => {
+//     return file.path == "/Users/cecilia/Desktop/LABORATORIA/CDMX010-md-links/";
+// }
+
+
+const mdLinks = (paths, dir) => {
+    //const ArrOfFiles = accesToSubdir('./sampleFiles');
+    // readingFiles("./README.md");
     // console.log(ArrOfFiles);
-    ArrofFiles.forEach(files => {
-        const filesPath = ArrofFiles.filter(filter_path);
-        console.log(filesPath);
-        // const extName = getFileExtension(path);
-        // console.log(extName);
-    });
+    // ArrOfFiles.forEach(files => {
+    //     const filesPath = ArrOfFiles.filter(filter_path);
+    //     console.log(filesPath);
+    //     // const extName = getFileExtension(path);
+    //     // console.log(extName);
+    // });
     // const extName = getFileExtension(path);
     // const fileContent = readFiles('./README.md'); 
     //const files = listOfFiles(path);
@@ -93,4 +138,4 @@ function mdLinks (paths, dir){
     // }
     // console.log()
 }
-mdLinks('./sampleFiles');
+mdLinks();
