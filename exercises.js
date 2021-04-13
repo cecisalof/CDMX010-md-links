@@ -138,3 +138,53 @@
 // const filter_path = (file) => {
 //     return file.path == "/Users/cecilia/Desktop/LABORATORIA/CDMX010-md-links/";
 // }
+
+
+// //-----MARKED LIBRARY ------
+//   render_link = const getPaths = (paths) => {
+//      let render = new marked.Renderer();
+//      render.link = function (href, title, text) {
+//         // render link text in a way that is appropriate
+//         // for a medium that is not a computer connected
+//         // to the Internet
+        
+//         return text + ' ( link to: ' + href + ' )';
+//      };
+//      return render;
+//  };
+ 
+//     fileContent = readFiles('./README.md'); 
+//     // console.log(marked(fileContent));
+//     console.log (marked(fileContent, {
+//             renderer: render_link()
+//         }));
+
+//------ GETTING ARRAY OF LINKS FROM A .md FILE-----------
+// const ArrOfLinks = (files) => {
+
+//     const file = fs.promises.readFile('./README.md', 'utf8')
+//     //console.log(fileContent)
+//     .then((data) => {
+//       let fileContent = data;
+      
+//        let links = [];
+//        //console.log(links);
+  
+//        const renderer = new marked.Renderer();
+//        renderer.link = (href, title, text) => {
+//         links = [].concat(...links, {href, title, text})
+//        }
+       
+//        marked.use({ renderer });
+      
+//       marked(fileContent);
+       
+//       //console.log(links);
+//       return links;
+       
+//       }).catch((err) => console.log(err))
+
+//       return file;
+//     }
+    
+//ArrOfLinks();
