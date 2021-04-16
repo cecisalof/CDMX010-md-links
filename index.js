@@ -67,32 +67,31 @@ const mdFilesInDir = (path) => {
         if(fileExtension === '.md'){
           mdFiles.push(filePath);
 
-        console.log(chalk.hex('#cbaacb')('List of .md files:'), chalk.hex('#6c88c4')(mdFiles));
-        //console.log("List of .md files:" + chalk.pink + filePath);
-        const linksInAFile = arrOfLinks(mdFiles);
-        //console.log(linksInAFile);
-        console.log(chalk.hex('ffffb5')("Links in the .md file:") , linksInAFile);
-          // const mdFiles = filesInDir.filter((extension) => {
-          //   if(fileExtension === '.md') 
-          //   console.log(filesInDir);
+          console.log(chalk.hex('#cbaacb')('.md files in the path:'), chalk.hex('#6c88c4')(mdFiles));
+          //console.log("List of .md files:" + chalk.pink + filePath);
+          // const linksInAFile = arrOfLinks(mdFiles);
+          //console.log(linksInAFile);
+          // console.log(chalk.hex('ffffb5')("Links in the .md file:") , linksInAFile);
             
-          // })
             //console.log(mdFiles)
             return mdFiles;
         };
+    
     // console.log(filesInDir);
     // return filesInDir;
-    // });
-    return filesInDir;
   })
 }
-  //mdFilesInDir('./sampleFiles');
+ mdFilesInDir('./sampleFiles');
 
 
 function mdLinks(path, options) {
   const listOfMdFiles = mdFilesInDir(path);
-  //console.log("md files inside mdLinks function", listOfMdFiles);
+  console.log(chalk.hex('#cbaacb')('.md files in the path:'), chalk.hex('#6c88c4')(listOfMdFiles));
+  //console.log("List of FILES", mdFilesInDir("./sampleFiles"))
   
+  // const linksInAFile = arrOfLinks(listOfMdFiles);
+  // console.log(linksInAFile);
+  //console.log(chalk.hex('ffffb5')("Links in the .md file:") , linksInAFile);
   //   listOfMdFiles.forEach((file) => {
   //     const filePath = file.path; 
   //     //console.log(filePath)// Getting just the path property of the arrOfFiles 
@@ -113,4 +112,4 @@ function mdLinks(path, options) {
   // });
     
 }
-mdLinks('./sampleFiles');
+//mdLinks('./sampleFiles');

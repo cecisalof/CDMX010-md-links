@@ -2,7 +2,7 @@ const marked = require("marked");
 const fs = require('fs');
 
 const arrOfLinks = (path) => {
-    const file = fs.readFileSync(path.toString(), 'utf8')
+    const file = fs.readFileSync(path, 'utf8')
       let fileContent = file;
       //console.log(fileContent)
       
