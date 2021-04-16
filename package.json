@@ -11,6 +11,7 @@
     "test": "test"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "chalk": "^4.1.0",
     "klaw-sync": "^6.0.0",
     "marked": "^2.0.1"

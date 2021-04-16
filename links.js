@@ -2,9 +2,7 @@ const marked = require("marked");
 const fs = require('fs');
 
 const arrOfLinks = (path) => {
-    const file = fs.readFileSync(path, 'utf8')
-    //console.log(file)
-    // .then((data) => {
+    const file = fs.readFileSync(path.toString(), 'utf8')
       let fileContent = file;
       //console.log(fileContent)
       
@@ -15,7 +13,7 @@ const arrOfLinks = (path) => {
        renderer.link = (href, title, text) => {
         // console.log("href", href)
         // console.log("texto", text)
-        //console.log(links)
+        // console.log(links)
         links = [].concat(...links, {href, title, text})
           
        }
@@ -26,12 +24,8 @@ const arrOfLinks = (path) => {
        
       //console.log(links);
       return links;
-       
-      // }).catch((err) => console.log(err))
-
-      //return file;
     }
     
-//arrOfLinks("./README.md");
+// arrOfLinks("./sampleFiles/test.md");
 
 module.exports = arrOfLinks;
