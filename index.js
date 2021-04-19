@@ -3,6 +3,8 @@ const fs = require('fs');
 const marked = require("marked");
 const path = require('path');
 const klawSync = require('klaw-sync')
+const arrOfLinks = require('./links.js');
+const { Console } = require('console');
 
 
 // ------------- READING FILES SYNCHONOUSLY-------------------
@@ -21,7 +23,7 @@ const readingFiles = (path) => {
 				return
 			}
       // Print the string representation of the data
-      console.log(data.toString());
+      //console.log(data.toString());
       return (data) //data contains the full content of the file
       
 		})
@@ -34,7 +36,7 @@ const readingFiles = (path) => {
 const getFileExtension = (URL) => {
     //Return the extension:
     const extName = path.extname(URL);
-    console.log(extName);
+    //console.log(extName);
     return extName;
 }
 // getFileExtension('./test.md');
@@ -44,7 +46,7 @@ const getFileExtension = (URL) => {
   const listOfFiles = (path) =>  {
 
     const readDir = fs.readdirSync(path);
-    console.log(readDir);
+    //console.log(readDir);
     return readDir;
 
   };
@@ -80,7 +82,7 @@ const accesToSubdir = (path) => {
     // }
     // console.dir(paths)
 
-    const paths = klawSync(path.toString()) //Return an array of objetcs with all the files that exist inside ./sampleFiles directory. 
+    const paths = klawSync(path) //Return an array of objetcs with all the files that exist inside ./sampleFiles directory. 
     //console.log(paths);
     return paths
 };
@@ -88,53 +90,59 @@ const accesToSubdir = (path) => {
 
 
 //------ GETTING ARRAY OF LINKS FROM A .md FILE-----------
-const ArrOfLinks = (files) => {
+// const ArrOfLinks = (files) => {
 
-    const file = fs.promises.readFile('./README.md', 'utf8')
-    //console.log(fileContent)
-    .then((data) => {
-      let fileContent = data;
+//     const file = fs.promises.readFile('./README.md', 'utf8')
+//     //console.log(fileContent)
+//     .then((data) => {
+//       let fileContent = data;
       
-       let links = [];
-       //console.log(links);
+//        let links = [];
+//        //console.log(links);
   
-       const renderer = new marked.Renderer();
-       renderer.link = (href, title, text) => {
-        links = [].concat(...links, {href, title, text})
-       }
+//        const renderer = new marked.Renderer();
+//        renderer.link = (href, title, text) => {
+//         links = [].concat(...links, {href, title, text})
+//        }
        
-       marked.use({ renderer });
+//        marked.use({ renderer });
       
-      marked(fileContent);
+//       marked(fileContent);
        
-      //console.log(links);
-      return links;
+//       //console.log(links);
+//       return links;
        
-      }).catch((err) => console.log(err))
+//       }).catch((err) => console.log(err))
 
-      return file;
-    }
+//       return file;
+//     }
     
-//ArrOfLinks();
+// //ArrOfLinks();
 
 
-function mdLinks(paths, dir) {
-  //const ArrOfFiles = accesToSubdir('./sampleFiles');
-  // readingFiles("./README.md");
+function mdLinks(path, options) {
+  const ArrOfFiles = accesToSubdir(path.toString());
   // console.log(ArrOfFiles);
-  // ArrOfFiles.forEach(files => {
-  //     const filesPath = ArrOfFiles.filter(filter_path);
-  //     console.log(filesPath);
-  //     // const extName = getFileExtension(path);
-  //     // console.log(extName);
-  // });
-  // const extName = getFileExtension(path);
-  // const fileContent = readFiles('./README.md'); 
-  //const files = listOfFiles(path);
-  // console.log(extName);
-  // if( extName === '.md' ){
-  //     return;
-  // }
-  // console.log()
+  let mdFiles = [];
+   ArrOfFiles.forEach(file => {
+      const filesPath = file.path;
+      //console.log(filesPath);
+      const selectedFiles = getFileExtension(filesPath);
+      //console.log(extName);
+
+      // let mdFiles = [];
+
+      if( selectedFiles === '.md' ){
+        console.log(filesPath)
+        mdFiles.push(filesPath);
+        
+      }
+
+      const links = arrOfLinks(mdFiles);
+      console.log(links);
+  });
+  
 }
-mdLinks();
+  // console.log()
+
+mdLinks("./sampleFiles");
