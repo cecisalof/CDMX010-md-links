@@ -13,8 +13,10 @@
   "dependencies": {
     "axios": "^0.21.1",
     "chalk": "^4.1.0",
+    "fetch": "^1.1.0",
     "klaw-sync": "^6.0.0",
-    "marked": "^2.0.1"
+    "marked": "^2.0.1",
+    "node-fetch": "^2.6.1"
   },
   "scripts": {
     "test": "jest --coverage"

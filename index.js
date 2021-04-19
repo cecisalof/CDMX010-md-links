@@ -6,6 +6,8 @@ const klawSync = require('klaw-sync');
 const arrOfLinks = require('./links.js');
 const chalk = require('chalk');
 const { Console } = require('console');
+const validateLinks = require('./validation.js');
+
 
 
 // ------------- READING FILES SYNCHONOUSLY-------------------
@@ -58,59 +60,55 @@ const getFileExtension = (URL) => {
 const mdFilesInDir = (path) => {
     const filesInDir = klawSync(path) //Return an array of objetcs with all the files that exist inside ./sampleFiles directory. 
     //console.log(filesInDir);
+    let mdFiles = [];
+    
     filesInDir.forEach((file) => {
       const filePath = file.path; // Getting just the path property of the arrOfFiles 
+      //console.log(filePath);
       const fileExtension = getFileExtension(filePath); // Getting the file´s extension
-
-      let mdFiles = [];
-
+      //console.log(fileExtension)
         if(fileExtension === '.md'){
           mdFiles.push(filePath);
+          
 
-        console.log(chalk.hex('#cbaacb')('List of .md files:'), chalk.hex('#6c88c4')(mdFiles));
-        //console.log("List of .md files:" + chalk.pink + filePath);
-        const linksInAFile = arrOfLinks(mdFiles);
-        //console.log(linksInAFile);
-        console.log(chalk.hex('ffffb5')("Links in the .md file:") , linksInAFile);
-          // const mdFiles = filesInDir.filter((extension) => {
-          //   if(fileExtension === '.md') 
-          //   console.log(filesInDir);
+        //console.log(chalk.hex('#cbaacb')('List of .md files:'), chalk.hex('#6c88c4')(mdFiles));
+        // //console.log("List of .md files:" + chalk.pink + filePath);
+        // const linksInAFile = arrOfLinks(mdFiles);
+        // //console.log(linksInAFile);
+        // console.log(chalk.hex('ffffb5')("Links in the .md file:") , linksInAFile);
+        //   // const mdFiles = filesInDir.filter((extension) => {
+        //   //   if(fileExtension === '.md') 
+        //   //   console.log(filesInDir);
             
-          // })
-            //console.log(mdFiles)
-            return mdFiles;
-        };
-    // console.log(filesInDir);
-    // return filesInDir;
+        //   // })
+        //     //console.log(mdFiles)
+        //     return mdFiles;
+       };
+   
     // });
-    return filesInDir;
+    // return filesInDir;
   })
+  //console.log(mdFiles);
+    return mdFiles;
 }
-  //mdFilesInDir('./sampleFiles');
+
+//mdFilesInDir('./sampleFiles');
 
 
 function mdLinks(path, options) {
   const listOfMdFiles = mdFilesInDir(path);
-  //console.log("md files inside mdLinks function", listOfMdFiles);
-  
-  //   listOfMdFiles.forEach((file) => {
-  //     const filePath = file.path; 
-  //     //console.log(filePath)// Getting just the path property of the arrOfFiles 
-  //     const fileExtension = getFileExtension(filePath); // Getting the file´s extension
-    
-  //     let mdFiles = [];
+  listOfMdFiles.forEach((file) => {
+  //console.log ("línea 98", listOfMdFiles)
+  console.log(chalk.hex('#cbaacb')('List of .md files:\n'), chalk.hex('#6c88c4')("\n", listOfMdFiles, "\n"));
+  // // //console.log("List of .md files:" + chalk.pink + filePath);
+  const linksInAFile = arrOfLinks(listOfMdFiles);
+  console.log(linksInAFile);
+  // console.log(chalk.hex('ffffb5')("Links in the .md file:") , linksInAFile);
+    })
+  }
+    // let validation = validateLinks(linksInAFile);
 
-  //     if(fileExtension === '.md'){
-  //       mdFiles.push(filePath);
-  //       //console.log(mdFiles);
 
-  //       console.log(chalk.hex('#cbaacb')('List of .md files:'), chalk.hex('#6c88c4')(mdFiles));
-  //       //console.log("List of .md files:" + chalk.pink + filePath);
-  //       const linksInAFile = arrOfLinks(mdFiles);
-  //       //console.log(linksInAFile);
-  //       console.log(chalk.hex('ffffb5')("Links in the .md file:") , linksInAFile);
-  //   } 
-  // });
     
-}
+
 mdLinks('./sampleFiles');

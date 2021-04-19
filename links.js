@@ -26,6 +26,6 @@ const arrOfLinks = (path) => {
       return links;
     }
     
-// arrOfLinks("./sampleFiles/test.md");
+//arrOfLinks("./README.md");
 
 module.exports = arrOfLinks;
