@@ -6,7 +6,7 @@ const klawSync = require('klaw-sync');
 const arrOfLinks = require('./links.js');
 const chalk = require('chalk');
 const { Console } = require('console');
-const validateLinks = require('./validation.js');
+const linkValidation = require('./validation.js');
 
 
 
@@ -70,7 +70,7 @@ const mdFilesInDir = (path) => {
         if(fileExtension === '.md'){
           mdFiles.push(filePath);
 
-
+        //console.log(mdFiles)
         //console.log(chalk.hex('#cbaacb')('List of .md files:'), chalk.hex('#6c88c4')(mdFiles));
         // //console.log("List of .md files:" + chalk.pink + filePath);
         // const linksInAFile = arrOfLinks(mdFiles);
@@ -89,7 +89,8 @@ const mdFilesInDir = (path) => {
     // return filesInDir;
   })
     
-  console.log(mdFiles);
+  
+  //console.log(mdFiles);
     return mdFiles;
 }
 
@@ -103,12 +104,13 @@ function mdLinks(path, options) {
   //console.log(chalk.hex('#cbaacb')('List of .md files:\n') + chalk.hex('#6c88c4')(listOfMdFiles));
   // // // //console.log("List of .md files:" + chalk.pink + filePath);
   listOfMdFiles.forEach(file => {
-    console.log(chalk.hex('#cbaacb')('List of .md files:\n') + chalk.hex('#6c88c4')(listOfMdFiles));
+    //console.log(chalk.hex('#cbaacb')('List of .md files:\n') + chalk.hex('#6c88c4')(listOfMdFiles));
     const linksInAFile = arrOfLinks(file);
     //console.log(linksInAFile);
-    console.log(chalk.hex('ffffb5')("Links in the .md file:") , linksInAFile);
-
+    //console.log(chalk.hex('ffffb5')("Links in the .md file:") , linksInAFile);
   })
+
+  let validation = linkValidation(path);
     //console.log(`----------------------------->${file}\n`,arrOfLinks(file)))
   //console.log(chalk.hex('#cbaacb')('List of .md files:\n') + chalk.hex('#6c88c4')(arrOfLinks(file))));
   // const linksInAFile = arrOfLinks(listOfMdFiles);
@@ -116,9 +118,5 @@ function mdLinks(path, options) {
   // console.log(chalk.hex('ffffb5')("Links in the .md file:") , linksInAFile);
     // })
   }
-    // let validation = validateLinks(linksInAFile);
-
-
-
 
 mdLinks('./sampleFiles');

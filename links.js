@@ -2,7 +2,7 @@ const marked = require("marked");
 const fs = require('fs');
 
 const arrOfLinks = (path) => {
-    const file = fs.readFileSync(path.toString(), 'utf8')
+    const file = fs.readFileSync(path, 'utf8')
       let fileContent = file;
       //console.log(fileContent)
       
@@ -14,8 +14,9 @@ const arrOfLinks = (path) => {
         // console.log("href", href)
         // console.log("texto", text)
         // console.log(links)
-        links = [].concat(...links, {href, title, text})
-          
+         if(href.charAt(0) !== '#'){
+            links = [].concat(...links, {href, title, text})
+         }
        }
        
        marked.use({ renderer });
