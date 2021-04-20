@@ -1,4 +1,6 @@
-const process = require('process')
+const process = require('process');
+const arrOfLinks = require('./links.js');
+const linkValidation = require('./validation.js')
 //console.log(process.argv)
 
 let myArgs = process.argv.slice(2); // to get rid off the first two arguments of the argument values array
@@ -6,11 +8,15 @@ let myArgs = process.argv.slice(2); // to get rid off the first two arguments of
 console.log('myArgs: ', myArgs);
 
 switch (myArgs[0]) {
-case 'insult':
-    console.log(myArgs[1], 'smells quite badly.');
+case '--validate':
+    linkValidation(arrOfLinks);
+    console.log(myArgs[0], 'link validation');
     break;
-case 'compliment':
-    console.log(myArgs[1], 'is really cool.');
+case '--stats':
+    console.log(myArgs[0], 'is really cool.');
+    break;
+case '--stats -- validate':
+    console.log(myArgs[0, 1], 'the are both super coll.');
     break;
 default:
     console.log('Sorry, that is not something I know how to do.');

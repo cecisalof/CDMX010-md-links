@@ -69,27 +69,8 @@ const mdFilesInDir = (path) => {
       //console.log(fileExtension)
         if(fileExtension === '.md'){
           mdFiles.push(filePath);
-
-        //console.log(mdFiles)
-        //console.log(chalk.hex('#cbaacb')('List of .md files:'), chalk.hex('#6c88c4')(mdFiles));
-        // //console.log("List of .md files:" + chalk.pink + filePath);
-        // const linksInAFile = arrOfLinks(mdFiles);
-        // //console.log(linksInAFile);
-        // console.log(chalk.hex('ffffb5')("Links in the .md file:") , linksInAFile);
-        //   // const mdFiles = filesInDir.filter((extension) => {
-        //   //   if(fileExtension === '.md')
-        //   //   console.log(filesInDir);
-
-        //   // })
-        //console.log(mdFiles)
-        //     return mdFiles;
        };
-
-    // });
-    // return filesInDir;
   })
-    
-  
   //console.log(mdFiles);
     return mdFiles;
 }
@@ -100,23 +81,25 @@ const mdFilesInDir = (path) => {
 function mdLinks(path, options) {
 
   const listOfMdFiles = mdFilesInDir(path);
-  // listOfMdFiles.forEach((file) => {
-  //console.log(chalk.hex('#cbaacb')('List of .md files:\n') + chalk.hex('#6c88c4')(listOfMdFiles));
-  // // // //console.log("List of .md files:" + chalk.pink + filePath);
+  //console.log(listOfMdFiles)
   listOfMdFiles.forEach(file => {
     //console.log(chalk.hex('#cbaacb')('List of .md files:\n') + chalk.hex('#6c88c4')(listOfMdFiles));
     const linksInAFile = arrOfLinks(file);
     //console.log(linksInAFile);
-    //console.log(chalk.hex('ffffb5')("Links in the .md file:") , linksInAFile);
-  })
 
-  let validation = linkValidation(path);
-    //console.log(`----------------------------->${file}\n`,arrOfLinks(file)))
+    linkValidation(linksInAFile)
+      .then(result => {
+        console.log(chalk.hex('#cbaacb')(`File´s name: ${file}\n`) + chalk.hex('#6c88c4')(`File´s links:`), result)
+      });
+
+  // let validation = linkValidation(linksInAFile);
+  // console.log(validation)
+  //   //console.log(`----------------------------->${file}\n`,arrOfLinks(file)))
   //console.log(chalk.hex('#cbaacb')('List of .md files:\n') + chalk.hex('#6c88c4')(arrOfLinks(file))));
   // const linksInAFile = arrOfLinks(listOfMdFiles);
   // //console.log(linksInAFile);
   // console.log(chalk.hex('ffffb5')("Links in the .md file:") , linksInAFile);
-    // })
+    })
   }
 
 mdLinks('./sampleFiles');
