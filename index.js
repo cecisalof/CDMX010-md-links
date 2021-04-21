@@ -1,11 +1,10 @@
 const fs = require('fs');
-//const { get } = require('http');
-const marked = require("marked");
+//const marked = require("marked");
 const path = require('path');
 const klawSync = require('klaw-sync');
 const arrOfLinks = require('./links.js');
 const chalk = require('chalk');
-const { Console } = require('console');
+//const { Console } = require('console');
 const linkValidation = require('./validation.js');
 
 
@@ -79,7 +78,6 @@ const mdFilesInDir = (path) => {
 
 
 function mdLinks(path, options) {
-
   const listOfMdFiles = mdFilesInDir(path);
   //console.log(listOfMdFiles)
   listOfMdFiles.forEach(file => {
@@ -91,14 +89,6 @@ function mdLinks(path, options) {
       .then(result => {
         console.log(chalk.hex('#cbaacb')(`File´s name: ${file}\n`) + chalk.hex('#6c88c4')(`File´s links:`), result)
       });
-
-  // let validation = linkValidation(linksInAFile);
-  // console.log(validation)
-  //   //console.log(`----------------------------->${file}\n`,arrOfLinks(file)))
-  //console.log(chalk.hex('#cbaacb')('List of .md files:\n') + chalk.hex('#6c88c4')(arrOfLinks(file))));
-  // const linksInAFile = arrOfLinks(listOfMdFiles);
-  // //console.log(linksInAFile);
-  // console.log(chalk.hex('ffffb5')("Links in the .md file:") , linksInAFile);
     })
   }
 
