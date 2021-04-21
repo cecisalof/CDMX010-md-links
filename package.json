@@ -5,7 +5,7 @@
   "main": "index.js",
   "license": "ISC",
   "bin": {
-    "md-links": "./mdLinks.js"
+    "md-links": "./index.js"
   },
   "publishConfig": {
     "access": "public"
