@@ -7,6 +7,7 @@ const arrOfLinks = require('./links.js');
 const chalk = require('chalk');
 //const { Console } = require('console');
 const linkValidation = require('./validation.js');
+const stadistics = require('./stats.js')
 
 
 

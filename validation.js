@@ -23,4 +23,5 @@ const linkValidation = (arrOfLinks) => {
   });
 };
 
+
 module.exports = linkValidation;
