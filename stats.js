@@ -34,6 +34,6 @@ const stadistics = (path) => {
     // console.log("Unknown", unknowStatus.length )
   
 }
-stadistics("./README.md");
+// stadistics("./README.md");
 
 module.export = stadistics;
