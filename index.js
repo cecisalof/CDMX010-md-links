@@ -1,20 +1,43 @@
+#!/usr/bin/env node
 const fs = require('fs');
-const { get } = require('http');
-const marked = require("marked");
+//const marked = require("marked");
 const path = require('path');
-const klawSync = require('klaw-sync')
+const klawSync = require('klaw-sync');
+const arrOfLinks = require('./links.js');
+const chalk = require('chalk');
+//const { Console } = require('console');
+const linkValidation = require('./validation.js');
+const stadistics = require('./stats.js')
 
 
-// ------------- READING FILES -------------------
-function readFiles(path){
+
+// ------------- READING FILES SYNCHONOUSLY-------------------
+const readFiles = (path) => {
     const fileContent = fs.readFileSync(path, 'utf8')
     //console.log(fileContent);
     return fileContent;
 };
-//readFiles('./README.md');
+// //readFiles('./README.md');
+
+//-------------READING FILES ASYNCHRONOUSLY -- fs.readFile takes the file path and the callback
+// const readingFiles = (path) => {
+// 	const fileContent = fs.readFile(path, 'utf8', (err, data) => {
+// 			if (err) {
+// 				console.error(err)
+// 				return
+// 			}
+//       // Print the string representation of the data
+//       //console.log(data.toString());
+//       return (data) //data contains the full content of the file
+
+// 		})
+
+//     }
+
+    //readingFiles("./README.md")
 
 // ------------- GET FILES EXTENSION-------------
-function getFileExtension(URL){
+const getFileExtension = (URL) => {
     //Return the extension:
     const extName = path.extname(URL);
     //console.log(extName);
@@ -24,70 +47,51 @@ function getFileExtension(URL){
 
 
 //----------ACCESS TO DIRECTORIES & SUBDIRECTORIES-------
-  const listOfFiles = (path) => {
+  const listOfFiles = (path) =>  {
+
     const readDir = fs.readdirSync(path);
     console.log(readDir);
     return readDir;
+
   };
   //listOfFiles('./sampleFiles');
 
-// //-----MARKED LIBRARY ------
-//   render_unlink = function () {
-//      let render = new marked.Renderer();
-//      render.link = function (href, title, text) {
-//         // render link text in a way that is appropriate
-//         // for a medium that is not a computer connected
-//         // to the Internet
-//         return text + ' ( link to: ' + href + ' )';
-//      };
-//      return render;
-//  },
- 
 
-//     fileContent = readFiles('./README.md'); 
-//     // console.log(marked(fileContent));
-//     console.log(marked(fileContent, {
-//             renderer: render_unlink()
-//         }));
+//------------EXERCISE OF RECURSIVNESS WITH klawSync-------
+const mdFilesInDir = (path) => {
+    const filesInDir = klawSync(path) //Return an array of objetcs with all the files that exist inside ./sampleFiles directory.
+    //console.log(filesInDir);
+    let mdFiles = [];
+
+    filesInDir.forEach((file) => {
+      const filePath = file.path; // Getting just the path property of the arrOfFiles
+      //console.log(filePath);
+      const fileExtension = getFileExtension(filePath); // Getting the file´s extension
+      //console.log(fileExtension)
+        if(fileExtension === '.md'){
+          mdFiles.push(filePath);
+       };
+  })
+  //console.log(mdFiles);
+    return mdFiles;
+}
+
+//mdFilesInDir('./sampleFiles');
 
 
+function mdLinks(path, options) {
+  const listOfMdFiles = mdFilesInDir(path);
+  //console.log(listOfMdFiles)
+  listOfMdFiles.forEach(file => {
+    //console.log(chalk.hex('#cbaacb')('List of .md files:\n') + chalk.hex('#6c88c4')(listOfMdFiles));
+    const linksInAFile = arrOfLinks(file);
+    //console.log(linksInAFile);
 
-//------------EXERCISE OF RECURSIVNESS WITH KLAWNSYNC-------
-// let paths
-// try {
-//   paths = klawSync('./sampleFiles')
-// } catch (er) {
-//   console.error(er)
-// }
-// console.dir(paths)
+    linkValidation(linksInAFile)
+      .then(result => {
+        console.log(chalk.hex('#cbaacb')(`File´s name: ${file}\n`) + chalk.hex('#6c88c4')(`File´s links:`), result)
+      });
+    })
+  }
 
-//-----SIMPLE CODE-------
-// const paths = klawSync('./sampleFiles')
-// console.log(paths);
-
-// --------------¿IS IT A .md FILE?------------------
-// function getLinksInFiles(data){
-//      const regexp = /\(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}\gi/gm;
-//     // /* Match only links that are fully qualified with https */
-//     //const fullLinkOnlyRegex = /^\[([\w\s\d]+)\]\((https?:\/\/[\w\d./?=#]+)\)$/
-//     // /* Match full links and relative paths */
-//     //const regEx = /^\[([\w\s\d]+)\]\(((?:\/|https?:\/\/)[\w\d./?=#]+)\)$/
-//     const myMatch = data.replace(/[{()}]/g, ' ').match(regexp)
-//     console.log(myMatch)
-//     return myMatch;
-//     /* ["[View the analytics docs](https://getanalytics.io/)", "View the analytics docs", "https://getanalytics.io/", index: 0, input: "[View the analytics docs](https://getanalytics.io/)", groups: undefined] */
-
-//     // // de-structure the array
-//     // const [ full, text, url ] = myMatch
-
-//     // console.log(text)
-//     // // 'View the analytics docs'
-
-//     // console.log(url)
-//     // // 'https://getanalytics.io/'
-//   }
-//   getLinksInFiles('./README.md');
-// //  console.log('PRINTING FILE CONTENT FROM', readFiles('./README.md'))
-// // // // console.log('PRINTING FILE EXTENSION FROM', getFileExtension('./test.md'))
-// //  console.log('GETING LINKS IN A FILE', getLinksInFiles('./README.md'))
-
+mdLinks('./sampleFiles');

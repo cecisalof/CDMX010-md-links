@@ -5,15 +5,21 @@
   "main": "index.js",
   "license": "ISC",
   "bin": {
-    "md-links": "./mdLinks.js"
+    "md-links": "./index.js"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "directories": {
     "test": "test"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "chalk": "^4.1.0",
+    "fetch": "^1.1.0",
     "klaw-sync": "^6.0.0",
-    "marked": "^2.0.1"
+    "marked": "^2.0.1",
+    "node-fetch": "^2.6.1"
   },
   "scripts": {
     "test": "jest --coverage"
@@ -29,6 +35,7 @@
   },
   "homepage": "https://github.com/cecisalof/CDMX010-md-links#readme",
   "devDependencies": {
+    "eslint": "^7.24.0",
     "jest": "^26.6.3"
   }
 }
